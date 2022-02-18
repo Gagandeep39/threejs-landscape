@@ -32,12 +32,12 @@ const planeMaterial = new THREE.MeshPhongMaterial({
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(planeMesh);
 // Mdfy the vertices
-const array = planeMesh.geometry.attributes.position.array;
+const array = planeMesh.geometry.attributes.position.array; // Extract the postion array of the geometry, contains vertex position in order x, y, z, x, y, z
 for (let i = 0; i < array.length; i += 3) {
   const x = array[i];
   const y = array[i + 1];
   const z = array[i + 2];
-  array[i + 2] = z + Math.random();
+  array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
 }
 
 // Create light source
