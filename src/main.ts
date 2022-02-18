@@ -8,10 +8,14 @@ const world = {
   plane: {
     width: 10,
     height: 10,
+    heightSegments: 10,
+    widthSegments: 10,
   },
 };
 gui.add(world.plane, 'width', 0, 20).onChange(generatePlane);
-gui.add(world.plane, 'height', 0, 20).onChange(() => generatePlane());
+gui.add(world.plane, 'height', 0, 20).onChange(generatePlane);
+gui.add(world.plane, 'heightSegments', 0, 50).onChange(generatePlane);
+gui.add(world.plane, 'widthSegments', 0, 50).onChange(() => generatePlane());
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -55,8 +59,8 @@ function generatePlane() {
   planeMesh.geometry = new THREE.PlaneGeometry(
     world.plane.width,
     world.plane.height,
-    10,
-    10
+    world.plane.widthSegments,
+    world.plane.heightSegments
   );
   modifyVertice();
 }
