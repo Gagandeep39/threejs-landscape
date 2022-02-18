@@ -14,6 +14,7 @@ const renderer = new THREE.WebGLRenderer();
 // Size of canvas
 // window.innerWidth === innerWidth
 renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(devicePixelRatio); // Smoothens the mesh
 document.body.appendChild(renderer.domElement);
 
 // Create a plane
