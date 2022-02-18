@@ -1,6 +1,18 @@
 import './style.css';
 
 import * as THREE from 'three';
+import * as dat from 'dat.gui';
+
+const gui = new dat.GUI();
+const world = {
+  plane: {
+    width: 10,
+    height: 10,
+  },
+};
+gui.add(world.plane, 'width', 0, 20).onChange(generatePlane);
+gui.add(world.plane, 'height', 0, 20).onChange(() => generatePlane());
+
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -31,19 +43,34 @@ const planeMaterial = new THREE.MeshPhongMaterial({
 });
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(planeMesh);
-// Mdfy the vertices
-const array = planeMesh.geometry.attributes.position.array; // Extract the postion array of the geometry, contains vertex position in order x, y, z, x, y, z
-for (let i = 0; i < array.length; i += 3) {
-  const x = array[i];
-  const y = array[i + 1];
-  const z = array[i + 2];
-  array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
-}
 
 // Create light source
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1); // Put it at center of material
 scene.add(light);
+modifyVertice();
+
+function generatePlane() {
+  planeMesh.geometry.dispose();
+  planeMesh.geometry = new THREE.PlaneGeometry(
+    world.plane.width,
+    world.plane.height,
+    10,
+    10
+  );
+  modifyVertice();
+}
+
+function modifyVertice() {
+  // Mdfy the vertices
+  const array = planeMesh.geometry.attributes.position.array; // Extract the postion array of the geometry, contains vertex position in order x, y, z, x, y, z
+  for (let i = 0; i < array.length; i += 3) {
+    const x = array[i];
+    const y = array[i + 1];
+    const z = array[i + 2];
+    array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
+  }
+}
 
 function animate() {
   requestAnimationFrame(animate);
