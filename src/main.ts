@@ -23,12 +23,18 @@ renderer.render(scene, camera);
 // Plane Geometry
 const planeGeometry = new THREE.PlaneGeometry(5, 5, 10, 10);
 // Plane Material
-const planeMaterial = new THREE.MeshBasicMaterial({
+// Phong Material needs light o be viewed
+const planeMaterial = new THREE.MeshPhongMaterial({
   color: 0xff0000,
   side: THREE.DoubleSide, // show both side
 });
 const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
 scene.add(planeMesh);
+
+// Create light source
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(0, 0, 1); // Put it at center of material
+scene.add(light);
 
 function animate() {
   requestAnimationFrame(animate);
