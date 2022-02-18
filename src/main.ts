@@ -28,11 +28,24 @@ scene.add(mesh);
 camera.position.z = 5;
 renderer.render(scene, camera);
 
+// Plane Geometry
+const planeGeometry = new THREE.PlaneGeometry(5, 5, 10, 10);
+// Plane Material
+const planeMaterial = new THREE.MeshBasicMaterial({
+  color: 0xff0000,
+  side: THREE.DoubleSide, // show both side
+});
+const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+scene.add(planeMesh);
+
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.01;
+
+  // move the plane
+  planeMesh.rotation.x += 0.01;
 }
 
 animate();
