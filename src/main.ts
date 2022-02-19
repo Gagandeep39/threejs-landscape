@@ -1,6 +1,7 @@
 import './style.css';
 
 import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { planeMesh } from './plane';
 
 const scene = new THREE.Scene();
@@ -19,6 +20,8 @@ renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(devicePixelRatio); // Smoothens the mesh
 document.body.appendChild(renderer.domElement);
 
+const orbitControl = new OrbitControls(camera, renderer.domElement);
+
 camera.position.z = 5; // How far we are from camera
 renderer.render(scene, camera);
 
@@ -28,6 +31,11 @@ scene.add(planeMesh);
 const light = new THREE.DirectionalLight(0xffffff, 1);
 light.position.set(0, 0, 1); // Put it at center of material
 scene.add(light);
+
+// Create light source behind
+const behindLight = new THREE.DirectionalLight(0xffffff, 1);
+behindLight.position.set(0, 0, -1); // Put it at center of material
+scene.add(behindLight);
 
 function animate() {
   requestAnimationFrame(animate);
