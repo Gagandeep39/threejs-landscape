@@ -4,6 +4,8 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { planeMesh } from './plane';
 
+// Laser pointer dot relative to the scene
+const rayCaster = new THREE.Raycaster();
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
   75,
@@ -37,25 +39,29 @@ const behindLight = new THREE.DirectionalLight(0xffffff, 1);
 behindLight.position.set(0, 0, -1); // Put it at center of material
 scene.add(behindLight);
 
+const mouse = {
+  x: 0,
+  y: 0,
+};
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+  // Creates a ray from camera to mouse
+  rayCaster.setFromCamera(mouse, camera);
+
+  // Returns an aray of points where ray nintecets ith the plane
+  const intersecting = rayCaster.intersectObject(planeMesh);
+
+  if (intersecting.length) {
+  }
 }
 
 animate();
 
-const mouse: {
-  x: number | undefined;
-  y: number | undefined;
-} = {
-  x: undefined,
-  y: undefined,
-};
 addEventListener('mousemove', (event) => {
   mouse.x = (event.clientX / innerWidth) * 2 - 1;
   mouse.y = -(event.clientY / innerHeight) * 2 + 1;
   // modify suc that center is 0, 0
-  console.log(mouse);
 });
 /**
  * 1. Create a scene

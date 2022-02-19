@@ -14,7 +14,7 @@ const planeMaterial = new THREE.MeshPhongMaterial({
   flatShading: true, // smooth the mesh
 });
 export const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
-
+generatePlane();
 export function generatePlane() {
   planeMesh.geometry.dispose();
   planeMesh.geometry = new THREE.PlaneGeometry(
@@ -36,3 +36,10 @@ export function modifyVertice() {
     array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
   }
 }
+
+planeMesh.geometry.setAttribute(
+  'color',
+  new THREE.BufferAttribute(new Float32Array([0, 0, 3]), 3)
+);
+// item size consists of length of each group
+// Its 3 coz r, g, b, r, g, b
