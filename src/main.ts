@@ -57,7 +57,8 @@ function animate() {
   if (intersecting.length > 0 && intersecting[0].object instanceof THREE.Mesh) {
     const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
 
-    geometry.attributes.color.setX(0, 0);
+    // Index = Intersetion of the ray with the plane
+    geometry.attributes.color.setX(intersecting[0].face?.a || 0, 0);
     geometry.attributes.color.needsUpdate = true;
   }
 }
