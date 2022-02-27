@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { createControls } from './control-handle';
+import { originalColor } from './plane-color';
 import { world } from './plane-structure';
 
 createControls();
@@ -41,7 +42,8 @@ export function modifyVertice() {
 // idividually set clor for each vertex and store in array
 const colors = [];
 for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-  colors.push(0, 0.19, 0.4);
+  const { r, g, b } = originalColor;
+  colors.push(r, g, b);
 }
 
 // Assign colors to the plane

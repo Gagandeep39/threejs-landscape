@@ -1,9 +1,9 @@
-import './style.css';
-
+import gsap from 'gsap';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { planeMesh } from './plane';
-import { BufferGeometry } from 'three';
+import { hoverColor, originalColor } from './plane-color';
+import './style.css';
 
 // Laser pointer dot relative to the scene
 const rayCaster = new THREE.Raycaster();
@@ -57,29 +57,51 @@ function animate() {
   if (intersecting.length > 0 && intersecting[0].object instanceof THREE.Mesh) {
     const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
     const { color } = geometry.attributes;
-    const colorCodes = {
-      r: 0.1,
-      g: 0.5,
-      b: 1,
-    };
-    // Set blue color
-    // Index = Intersetion of the ray with the plane
-    // Vertice 1
-    color.setX(intersecting[0].face!.a, colorCodes.r);
-    color.setY(intersecting[0].face!.a, colorCodes.g);
-    color.setZ(intersecting[0].face!.a, colorCodes.b);
+    const { r, g, b } = hoverColor;
+    updateVertexColor(color, intersecting[0].face!, r, g, b);
 
-    // Vertice 2
-    color.setX(intersecting[0].face!.b, colorCodes.r);
-    color.setY(intersecting[0].face!.b, colorCodes.g);
-    color.setZ(intersecting[0].face!.b, colorCodes.b);
+    const tempHoverColor = { ...hoverColor };
 
-    // Vertice 3
-    color.setX(intersecting[0].face!.c, colorCodes.r);
-    color.setY(intersecting[0].face!.c, colorCodes.g);
-    color.setZ(intersecting[0].face!.c, colorCodes.b);
-    color.needsUpdate = true;
+    // Fade and reset to original color
+    gsap.to(tempHoverColor, {
+      r: originalColor.r,
+      g: originalColor.g,
+      b: originalColor.b,
+      onUpdate: () => {
+        updateVertexColor(
+          color,
+          intersecting[0].face!,
+          tempHoverColor.r,
+          tempHoverColor.g,
+          tempHoverColor.b
+        );
+      },
+    });
   }
+}
+
+function updateVertexColor(
+  vertex: THREE.BufferAttribute | THREE.InterleavedBufferAttribute,
+  face: THREE.Face,
+  r: number,
+  g: number,
+  b: number
+) {
+  // Vertice 1
+  vertex.setX(face!.a, r);
+  vertex.setY(face!.a, g);
+  vertex.setZ(face!.a, b);
+
+  // Vertice 2
+  vertex.setX(face!.b, r);
+  vertex.setY(face!.b, g);
+  vertex.setZ(face!.b, b);
+
+  // Vertice 3
+  vertex.setX(face!.c, r);
+  vertex.setY(face!.c, g);
+  vertex.setZ(face!.c, b);
+  vertex.needsUpdate = true;
 }
 
 animate();
