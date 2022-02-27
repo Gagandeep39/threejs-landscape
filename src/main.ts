@@ -56,10 +56,13 @@ function animate() {
   // Checksif the intersection hs chnged and update accordinly
   if (intersecting.length > 0 && intersecting[0].object instanceof THREE.Mesh) {
     const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
+    const { color } = geometry.attributes;
 
     // Index = Intersetion of the ray with the plane
-    geometry.attributes.color.setX(intersecting[0].face?.a || 0, 0);
-    geometry.attributes.color.needsUpdate = true;
+    color.setX(intersecting[0].face!.a, 0);
+    color.setY(intersecting[0].face!.b, 0);
+    color.setZ(intersecting[0].face!.c, 0);
+    color.needsUpdate = true;
   }
 }
 
