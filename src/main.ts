@@ -58,10 +58,22 @@ function animate() {
     const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
     const { color } = geometry.attributes;
 
+    // Set blue color
     // Index = Intersetion of the ray with the plane
+    // Vertice 1
     color.setX(intersecting[0].face!.a, 0);
+    color.setY(intersecting[0].face!.a, 0);
+    color.setZ(intersecting[0].face!.a, 1);
+
+    // Vertice 2
+    color.setX(intersecting[0].face!.b, 0);
     color.setY(intersecting[0].face!.b, 0);
-    color.setZ(intersecting[0].face!.c, 0);
+    color.setZ(intersecting[0].face!.b, 1);
+
+    // Vertice 3
+    color.setX(intersecting[0].face!.c, 0);
+    color.setY(intersecting[0].face!.c, 0);
+    color.setZ(intersecting[0].face!.c, 1);
     color.needsUpdate = true;
   }
 }
