@@ -57,23 +57,27 @@ function animate() {
   if (intersecting.length > 0 && intersecting[0].object instanceof THREE.Mesh) {
     const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
     const { color } = geometry.attributes;
-
+    const colorCodes = {
+      r: 0.1,
+      g: 0.5,
+      b: 1,
+    };
     // Set blue color
     // Index = Intersetion of the ray with the plane
     // Vertice 1
-    color.setX(intersecting[0].face!.a, 0);
-    color.setY(intersecting[0].face!.a, 0);
-    color.setZ(intersecting[0].face!.a, 1);
+    color.setX(intersecting[0].face!.a, colorCodes.r);
+    color.setY(intersecting[0].face!.a, colorCodes.g);
+    color.setZ(intersecting[0].face!.a, colorCodes.b);
 
     // Vertice 2
-    color.setX(intersecting[0].face!.b, 0);
-    color.setY(intersecting[0].face!.b, 0);
-    color.setZ(intersecting[0].face!.b, 1);
+    color.setX(intersecting[0].face!.b, colorCodes.r);
+    color.setY(intersecting[0].face!.b, colorCodes.g);
+    color.setZ(intersecting[0].face!.b, colorCodes.b);
 
     // Vertice 3
-    color.setX(intersecting[0].face!.c, 0);
-    color.setY(intersecting[0].face!.c, 0);
-    color.setZ(intersecting[0].face!.c, 1);
+    color.setX(intersecting[0].face!.c, colorCodes.r);
+    color.setY(intersecting[0].face!.c, colorCodes.g);
+    color.setZ(intersecting[0].face!.c, colorCodes.b);
     color.needsUpdate = true;
   }
 }
