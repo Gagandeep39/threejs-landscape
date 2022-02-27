@@ -52,7 +52,11 @@ function animate() {
   // Returns an aray of points where ray nintecets ith the plane
   const intersecting = rayCaster.intersectObject(planeMesh);
 
-  if (intersecting.length) {
+  // Checksif the intersection hs chnged and update accordinly
+  if (intersecting.length && intersecting[0].object instanceof THREE.Mesh) {
+    const { color } = intersecting[0].object.geometry.attributes;
+    color.setX(intersecting[0].face?.a || 0, 0);
+    color.needsUpdate = true;
   }
 }
 
