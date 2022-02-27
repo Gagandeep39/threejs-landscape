@@ -41,7 +41,7 @@ export function modifyVertice() {
 // idividually set clor for each vertex and store in array
 const colors = [];
 for (let i = 0; i < planeMesh.geometry.attributes.position.count; i++) {
-  colors.push(0, 0, 1);
+  colors.push(1, 0, 0);
 }
 
 // Assign colors to the plane

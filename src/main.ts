@@ -3,6 +3,7 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { planeMesh } from './plane';
+import { BufferGeometry } from 'three';
 
 // Laser pointer dot relative to the scene
 const rayCaster = new THREE.Raycaster();
@@ -53,10 +54,11 @@ function animate() {
   const intersecting = rayCaster.intersectObject(planeMesh);
 
   // Checksif the intersection hs chnged and update accordinly
-  if (intersecting.length && intersecting[0].object instanceof THREE.Mesh) {
-    const { color } = intersecting[0].object.geometry.attributes;
-    color.setX(intersecting[0].face?.a || 0, 0);
-    color.needsUpdate = true;
+  if (intersecting.length > 0 && intersecting[0].object instanceof THREE.Mesh) {
+    const geometry: THREE.BufferGeometry = intersecting[0].object.geometry;
+
+    geometry.attributes.color.setX(0, 0);
+    geometry.attributes.color.needsUpdate = true;
   }
 }
 
