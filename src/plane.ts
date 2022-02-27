@@ -37,18 +37,26 @@ export function generatePlane() {
 export function modifyVertice() {
   // Mdfy the vertices
   const array: any = planeMesh.geometry.attributes.position.array; // Extract the postion array of the geometry, contains vertex position in order x, y, z, x, y, z
-  for (let i = 0; i < array.length; i += 3) {
-    const z = array[i + 2];
-    array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
+  const randonValues = [];
+  for (let i = 0; i < array.length; i++) {
+    if (i % 3 === 0) {
+      const x = array[i];
+      const y = array[i + 1];
+      const z = array[i + 2];
+      array[i] = x + (Math.random() - 0.5);
+      array[i + 1] = y + (Math.random() - 0.5);
+      array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
+    }
+
+    randonValues.push(Math.random() - 0.5);
   }
 
-  // Mdfy the normals
-  let { position } = planeMesh.geometry.attributes;
-  position = {
-    ...position,
-    originalPosition: position.array,
-  } as any;
-  console.log(position);
+  // Mdfy the orignal object and add a postion array that changes
+
+  (<any>planeMesh.geometry.attributes.position).originalPosition =
+    planeMesh.geometry.attributes.position.array;
+
+  (<any>planeMesh.geometry.attributes.position).randomValues = randonValues;
 }
 
 export function addColors() {

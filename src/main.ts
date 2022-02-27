@@ -44,11 +44,22 @@ const mouse = {
   x: 0,
   y: 0,
 };
+
+let frame = 0;
 function animate() {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
   // Creates a ray from camera to mouse
   rayCaster.setFromCamera(mouse, camera);
+  frame += 0.01;
+  const { array, originalPosition, randomValues } = planeMesh.geometry
+    .attributes.position as any;
+  for (let i = 0; i < array.length; i += 3) {
+    array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.003;
+    array[i + 1] =
+      originalPosition[i + 1] + Math.cos(frame + randomValues[i + 1]) * 0.003;
+  }
+  planeMesh.geometry.attributes.position.needsUpdate = true;
 
   // Returns an aray of points where ray nintecets ith the plane
   const intersecting = rayCaster.intersectObject(planeMesh);
