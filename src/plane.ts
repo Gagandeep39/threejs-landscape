@@ -6,7 +6,12 @@ import { world } from './plane-structure';
 createControls();
 
 // Plane Geometry
-const planeGeometry = new THREE.PlaneGeometry(5, 5, 10, 10);
+const planeGeometry = new THREE.PlaneGeometry(
+  world.plane.width,
+  world.plane.height,
+  world.plane.widthSegments,
+  world.plane.heightSegments
+);
 // Plane Material
 // Phong Material needs light o be viewed
 const planeMaterial = new THREE.MeshPhongMaterial({

@@ -1,8 +1,8 @@
 export const world = {
   plane: {
-    width: 10,
-    height: 10,
-    heightSegments: 10,
-    widthSegments: 10,
+    width: 16,
+    height: 16,
+    heightSegments: 22,
+    widthSegments: 22,
   },
 };
