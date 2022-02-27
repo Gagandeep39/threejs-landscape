@@ -43,12 +43,12 @@ export function modifyVertice() {
       const x = array[i];
       const y = array[i + 1];
       const z = array[i + 2];
-      array[i] = x + (Math.random() - 0.5);
-      array[i + 1] = y + (Math.random() - 0.5);
-      array[i + 2] = z + Math.random(); // Randomly azzing the z value of vertx
+      array[i] = x + (Math.random() - 0.5) * 3;
+      array[i + 1] = y + (Math.random() - 0.5) * 3;
+      array[i + 2] = z + Math.random() * 3; // Randomly azzing the z value of vertx
     }
 
-    randonValues.push(Math.random() - 0.5);
+    randonValues.push(Math.random() * Math.PI - 0.5);
   }
 
   // Mdfy the orignal object and add a postion array that changes

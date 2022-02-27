@@ -25,14 +25,14 @@ document.body.appendChild(renderer.domElement);
 
 new OrbitControls(camera, renderer.domElement);
 
-camera.position.z = 5; // How far we are from camera
+camera.position.z = 50; // How far we are from camera
 renderer.render(scene, camera);
 
 scene.add(planeMesh);
 
 // Create light source
 const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(0, 0, 1); // Put it at center of material
+light.position.set(0, -1, 1); // Put it at center of material
 scene.add(light);
 
 // Create light source behind
@@ -55,9 +55,9 @@ function animate() {
   const { array, originalPosition, randomValues } = planeMesh.geometry
     .attributes.position as any;
   for (let i = 0; i < array.length; i += 3) {
-    array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.003;
+    array[i] = originalPosition[i] + Math.cos(frame + randomValues[i]) * 0.01;
     array[i + 1] =
-      originalPosition[i + 1] + Math.cos(frame + randomValues[i + 1]) * 0.003;
+      originalPosition[i + 1] + Math.cos(frame + randomValues[i + 1]) * 0.01;
   }
   planeMesh.geometry.attributes.position.needsUpdate = true;
 
