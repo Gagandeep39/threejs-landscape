@@ -5,19 +5,31 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital@1&family=Inter:wght@300;400;500;700&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
     <title>Three JS Landscape</title>
   </head>
   <body>
     <div id="app">
-      <div class="absolute text-white">
-        <h1>Gagandeep Singh</h1>
-        <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt
-          saepe alias debitis ipsam, quas veniam maiores a nisi quidem, ex
-          autem? Commodi accusamus dolorem doloribus culpa nulla itaque rerum
-          placeat?
-        </p>
-        <button>View My Work</button>
+      <div class="container">
+        <div
+          class="text-center flex flex-col absolute row h-screen text-white justify-center items-center"
+        >
+          <h1 class="font-mono tracking-wide">Gagandeep Singh</h1>
+          <p class="font-exo uppercase text-2xl font-bold">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+          </p>
+          <a
+            class="border px-4 py-2 rounded-lg text-sm font-mono uppercase mt-12 hover:bg-white hover:text-gray-800"
+            href="https://www.github.com/gagandeep39"
+          >
+            View My Work
+          </a>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
