@@ -23,7 +23,7 @@ renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(devicePixelRatio); // Smoothens the mesh
 document.body.appendChild(renderer.domElement);
 
-const orbitControl = new OrbitControls(camera, renderer.domElement);
+new OrbitControls(camera, renderer.domElement);
 
 camera.position.z = 5; // How far we are from camera
 renderer.render(scene, camera);
