@@ -13,10 +13,6 @@ body {
   justify-content: center;
 }
 
-.container {
-  width: min(300px, 100%);
-}
-
 .font-exo {
   font-family: 'Exo 2', sans-serif;
 }
